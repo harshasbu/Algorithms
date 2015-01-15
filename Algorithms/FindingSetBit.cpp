@@ -8,26 +8,33 @@
 
 using namespace std;
 
-int Position(int Number){
-	int value = 1;
-	for(int position = 1; position <=8; position++){
-		if(Number & (value << position -1)){
-			return position;
-		}
-	}
-	return 0;
+int Powerof2(int Number){
+	return Number & (!(Number & (Number - 1)));
 }
+
+
+int Position(int Number){
+	if(!Powerof2(Number))
+		return 0;
+	int value = 1, position = 1;
+		while(!(Number & (value << position -1))){
+			position++;
+
+	}
+	return position;
+}
+
+
 
 int main(){
 	int Number;
-	cout << "Enter the number for which you want to find the position of bit set :";
+	cout << "Enter the number which is power of 2 :";
 	cin >> Number;
 	if(int pos = Position(Number))
-		cout << "The position of the bit set is :"<<pos <<endl;
+		cout << "The position of the bit set is :"<< pos <<endl;
 	else
-		cout << "No bit is set" <<endl;
+		cout << "Number is not power of 2" << endl;
 	return 0;
 }
-
 
 
